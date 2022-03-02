@@ -4,6 +4,7 @@ namespace App\Repository;
 
 use App\Entity\User;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\OptimisticLockException;
 use Doctrine\ORM\ORMException;
 use Doctrine\Persistence\ManagerRegistry;
@@ -61,6 +62,39 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
         $this->_em->persist($user);
         $this->_em->flush();
     }
+
+
+    public function countAll(): int
+    {
+        $qb = $this->createQueryBuilder('u')
+            ->select('count(u.id)');
+        
+        return $qb->getQuery()->getSingleScalarResult();
+    }
+
+
+
+    public function averageAge(): int
+    {
+        $query = $this->createQueryBuilder('u')
+            ->select('avg(DATE_DIFF(:now, u.birthdate))')
+            ->setParameter('now', new \DateTime(), Types::DATETIME_MUTABLE);
+
+        $qb = $query->getQuery();
+        return floor($qb->getSingleScalarResult())/365; // le résultat renvoie une moyenne en nombre de jours, j'ai divisé par 365 pour l'avoir en années et ai arrondi avec floor()
+    }
+
+    public function nbBetweenUsers(): int
+    {
+        $qb = $this->createQueryBuilder('u')
+            ->select('count(u.id)')
+            ->andWhere('DATE_DIFF(:now, u.birthdate) >= 7300') // 7300 correspond à 20 convertit en nombre de jours
+            ->andWhere('DATE_DIFF(:now, u.birthdate) <= 18250') // la même chose pour 50 ans
+            ->setParameter('now', new \DateTime(), Types::DATETIME_MUTABLE);
+
+        return $qb->getQuery()->getSingleScalarResult();
+    }
+
 
     // /**
     //  * @return User[] Returns an array of User objects

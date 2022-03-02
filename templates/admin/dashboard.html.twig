@@ -1,0 +1,21 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Tableau de bord
+{% endblock %}
+
+{% block body %}
+	<div class="container text-center mt-5">
+		<h1 class="my-5">Tableau de bord</h1>
+		<div class="row">
+			<div class="col">
+				<div class="p-3 border bg-light">Il y a {{ (nbTotalUsers) }} utilisateurs.</div>
+			</div>
+			<div class="col">
+				<div class="p-3 border bg-light">L'âge moyen est {{ (avgAgeUsers) }} ans.</div>
+			</div>
+			<div class="col">
+				<div class="p-3 border bg-light">Il y a {{ (nbUsersMiddleAge) }} utilisateurs qui ont entre 20 et 50 ans.</div>
+			</div>
+		</div>
+	</div>
+{% endblock %}

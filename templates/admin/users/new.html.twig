@@ -9,4 +9,8 @@
         {{ include("admin/users/_form.html.twig", {button: 'Créer'}) }}
     </div>
 
+    <p class="text-center mt-3">
+        La validation seule côté front ne suffit pas car elle peut permettre des malveillances de la part d'utilisateurs.
+        Cette page ne respecte pas les obligations du RGPD.
+    </p>
 {% endblock %}

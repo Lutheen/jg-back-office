@@ -1,0 +1,22 @@
+{% extends "base.html.twig" %}
+
+{% block title %}Ajouter des centres d'intérêts
+{% endblock %}
+
+{% block body %}
+
+	<div class="container mt-4 gy-5">
+		<div class="row">
+			<h2>Centres d'intérêts</h2>
+			<p>{{ user.interests }}</p>
+		</div>
+        <div class="row">
+            <h2>Ajouter un centre d'intérêt</h2>
+            {{ form_start(form) }}
+            <div class="col-md-4">{{ form_row(form.interests) }}</div>
+            <button class="btn btn-primary mt-2">{{ button|default('Valider')}}</button>
+            {{ form_end(form) }}
+        </div>
+	</div>
+
+{% endblock %}

@@ -23,6 +23,7 @@ class UserFixtures extends Fixture
         $admin->setLastname('Dmin');
         $admin->setFirstname('A');
         $admin->setBirthdate(new \DateTime('12-01-1991'));
+        $admin->setInterests('les licornes et la couture');
         $admin->setPassword(
             $this->passwordEncoder->hashPassword($admin, 'admin')
         );
@@ -39,6 +40,7 @@ class UserFixtures extends Fixture
             $user->setLastname($faker->lastname);
             $user->setFirstname($faker->firstname);
             $user->setBirthdate($faker->dateTime());
+            $user->setInterests($faker->text(20));
             $user->setPassword(
                 $this->passwordEncoder->hashPassword($user, 'secret')
             );

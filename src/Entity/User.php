@@ -38,6 +38,9 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(type: 'datetime_immutable', options: ['default' => 'CURRENT_TIMESTAMP'])]
     private $created_at;
 
+    #[ORM\Column(type: 'text', nullable: true)]
+    private $interests;
+
     public function __construct()
     {
         $this->created_at = new \DateTimeImmutable();
@@ -173,5 +176,17 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         }
 
         return null;
+    }
+
+    public function getInterests(): ?string
+    {
+        return $this->interests;
+    }
+
+    public function setInterests(?string $interests): self
+    {
+        $this->interests = $interests;
+
+        return $this;
     }
 }
